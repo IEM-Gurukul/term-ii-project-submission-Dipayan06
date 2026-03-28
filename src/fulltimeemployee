@@ -1,0 +1,59 @@
+class FullTimeEmployee extends Employee {
+    private double bonus;
+    private double taxRate; // percentage (e.g., 10 for 10%)
+
+    // Constructor
+    public FullTimeEmployee(int id, String name, double baseSalary, double bonus, double taxRate) {
+        super(id, name, baseSalary);
+
+        if (bonus < 0 || taxRate < 0) {
+            throw new IllegalArgumentException("Bonus and tax rate cannot be negative");
+        }
+
+        this.bonus = bonus;
+        this.taxRate = taxRate;
+    }
+
+    // Getters
+    public double getBonus() {
+        return bonus;
+    }
+
+    public double getTaxRate() {
+        return taxRate;
+    }
+
+    // Setters with validation
+    public void setBonus(double bonus) {
+        if (bonus < 0) {
+            throw new IllegalArgumentException("Bonus cannot be negative");
+        }
+        this.bonus = bonus;
+    }
+
+    public void setTaxRate(double taxRate) {
+        if (taxRate < 0) {
+            throw new IllegalArgumentException("Tax rate cannot be negative");
+        }
+        this.taxRate = taxRate;
+    }
+
+    // Override abstract method
+    @Override
+    public double calculateSalary() {
+        double grossSalary = getBaseSalary() + bonus;
+        double tax = (taxRate / 100) * grossSalary;
+        return grossSalary - tax;
+    }
+
+    // Display details (Polymorphism)
+    @Override
+    public void displayDetails() {
+        super.displayDetails();
+        System.out.println("Employee Type: Full-Time");
+        System.out.println("Bonus: " + bonus);
+        System.out.println("Tax Rate: " + taxRate + "%");
+        System.out.println("Net Salary: " + calculateSalary());
+        System.out.println("------------------------");
+    }
+}
