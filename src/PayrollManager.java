@@ -15,22 +15,23 @@ class PayrollManager {
     }
 
     // Remove employee by ID
-    public void removeEmployee(int id) {
-        boolean found = false;
+   public void removeEmployee(int id) {
+    Employee toRemove = null;
 
-        for (Employee emp : employees) {
-            if (emp.getId() == id) {
-                employees.remove(emp);
-                System.out.println("Employee removed successfully.");
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            System.out.println("Employee not found.");
+    for (Employee emp : employees) {
+        if (emp.getId() == id) {
+            toRemove = emp;
+            break;
         }
     }
+
+    if (toRemove != null) {
+        employees.remove(toRemove);
+        System.out.println("Employee removed successfully.");
+    } else {
+        System.out.println("Employee not found.");
+    }
+}
 
     // Display all employees
     public void displayAllEmployees() {
